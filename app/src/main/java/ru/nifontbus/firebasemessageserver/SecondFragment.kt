@@ -1,12 +1,14 @@
 package ru.nifontbus.firebasemessageserver
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import ru.nifontbus.firebasemessageserver.databinding.FragmentSecondBinding
+import ru.nifontbus.firebasemessageserver.retrofit.RetrofitRepository
+
 
 /**
  * A simple [Fragment] subclass as the second destination in the navigation.
@@ -14,6 +16,7 @@ import ru.nifontbus.firebasemessageserver.databinding.FragmentSecondBinding
 class SecondFragment : Fragment() {
 
     private var _binding: FragmentSecondBinding? = null
+    private  val repository by lazy { RetrofitRepository() }
 
     // This property is only valid between onCreateView and
     // onDestroyView.
@@ -26,7 +29,6 @@ class SecondFragment : Fragment() {
 
         _binding = FragmentSecondBinding.inflate(inflater, container, false)
         return binding.root
-
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -35,8 +37,11 @@ class SecondFragment : Fragment() {
         binding.buttonSecond.setOnClickListener {
             findNavController().navigate(R.id.action_SecondFragment_to_FirstFragment)
         }
-    }
 
+        binding.fab.setOnClickListener {
+            repository.sendPush(binding.etBody.text.toString(), binding.etTitle.text.toString())
+        }
+    }
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null

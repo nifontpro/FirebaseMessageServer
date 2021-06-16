@@ -2,13 +2,13 @@
     <string name="app_name">Firebase Message Server</string>
     <string name="action_settings">Settings</string>
     <!-- Strings used for fragments for navigation -->
-    <string name="first_fragment_label">First Fragment</string>
-    <string name="second_fragment_label">Second Fragment</string>
-    <string name="next">Next</string>
-    <string name="previous">Previous</string>
+    <string name="first_fragment_label">Push from OkHttp</string>
+    <string name="second_fragment_label">Push from Retrofit</string>
+    <string name="next">To Retrofit</string>
+    <string name="previous">To OkHttp</string>
 
     <string name="hello_first_fragment">Send Push from OkHttp</string>
-    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+    <string name="hello_second_fragment">Send Push from Retrofit</string>
     <string name="send_text">Send push</string>
     <string name="s_msg">Message</string>
     <string name="s_title">Title</string>

@@ -7,11 +7,12 @@ import android.util.Log
 
 class App: Application() {
     companion object {
+        const val TAG = "My log"
         private val handlerThread by lazy { HandlerThread("pushThread") }
         val pushHandler by lazy { Handler(handlerThread.looper) }
         init {
             handlerThread.start()
-            Log.e("my", "Start Push Thread!")
+            Log.e(TAG, "Start Push Thread!")
         }
     }
 

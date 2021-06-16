@@ -11,16 +11,15 @@ import okhttp3.*
 import okhttp3.RequestBody.Companion.toRequestBody
 import okio.IOException
 import org.json.JSONObject
+import ru.nifontbus.firebasemessageserver.App.Companion.TAG
 import ru.nifontbus.firebasemessageserver.App.Companion.pushHandler
 import ru.nifontbus.firebasemessageserver.databinding.FragmentFirstBinding
+import ru.nifontbus.firebasemessageserver.okhttp.OkHtmlRepository
+import ru.nifontbus.firebasemessageserver.retrofit.RetrofitRepository
 
-const val TAG = "My log"
-
-/**
- * A simple [Fragment] subclass as the default destination in the navigation.
- */
 class FirstFragment : Fragment() {
 
+    private  val repository by lazy { OkHtmlRepository() }
     private var _binding: FragmentFirstBinding? = null
 
     // This property is only valid between onCreateView and
@@ -34,7 +33,6 @@ class FirstFragment : Fragment() {
 
         _binding = FragmentFirstBinding.inflate(inflater, container, false)
         return binding.root
-
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -44,61 +42,10 @@ class FirstFragment : Fragment() {
             findNavController().navigate(R.id.action_FirstFragment_to_SecondFragment)
         }
 
-        binding.button.setOnClickListener {
-            sendPush(binding.etBody.text.toString(), binding.etTitle.text.toString()) }
-    }
-
-/*  Формат HTTP - POST запроса
-    Content-Type:application/json
-    Authorization:key=AIzaSyZ-1u...0GBYzPu7Udno5aA
-
-        {
-            "to" : "bk3RNwTe3H0:CI2k_HHwgIpoDKCIZvvDMExUdFQ3P1...",
-            "data" : {
-            ...
-        },
-    }*/
-
-    /**
-     * Отправка push-сообщений
-     * LEGACY_SERVER_KEY - ключ приложения в настройках Firebase
-     * REG_TOKEN - токен, хранящийся локально на устройстве.
-     *
-     */
-    private fun sendPush(title: String, body: String) {
-        pushHandler.post {
-            val client = OkHttpClient()
-            val json = JSONObject()
-            val dataJson = JSONObject()
-
-            dataJson.put("body", body)
-            dataJson.put("title", title)
-            json.put("to", BuildConfig.REG_TOKEN)
-            json.put("notification", dataJson)
-
-            Log.d("my", "json: $json")
-
-            val request = Request.Builder()
-                .url("https://fcm.googleapis.com/fcm/send")
-                .header("Content-Type", "application/json")
-                .header("Authorization", "key=${BuildConfig.LEGACY_SERVER_KEY}")
-                .method("POST", json.toString().toRequestBody())
-                .build()
-
-            client.newCall(request).enqueue(object : Callback {
-
-                override fun onResponse(call: Call, response: Response) {
-                    Log.d("my", "Push send Ok")
-                }
-
-                override fun onFailure(call: Call, e: IOException) {
-                    Log.e("my", "Error send push message!")
-                }
-            })
+        binding.fab.setOnClickListener {
+            repository.sendPush(binding.etBody.text.toString(), binding.etTitle.text.toString())
         }
     }
-
-    //        https://stackoverflow.com/questions/56893945/how-to-use-okhttp-to-make-a-post-request-in-kotlin
 
     override fun onDestroyView() {
         super.onDestroyView()
