@@ -1,4 +1,4 @@
-package ru.nifontbus.firebasemessageserver
+package ru.nifontbus.firebasemessageserver.cconst
 
 class Const {
     companion object {

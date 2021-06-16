@@ -4,6 +4,7 @@ import android.app.Application
 import android.os.Handler
 import android.os.HandlerThread
 import android.util.Log
+import ru.nifontbus.firebasemessageserver.cconst.Const
 
 class App: Application() {
     companion object {

@@ -12,8 +12,8 @@ import okhttp3.RequestBody.Companion.toRequestBody
 import okio.IOException
 import org.json.JSONObject
 import ru.nifontbus.firebasemessageserver.App.Companion.pushHandler
-import ru.nifontbus.firebasemessageserver.Const.Companion.LEGACY_SERVER_KEY
-import ru.nifontbus.firebasemessageserver.Const.Companion.REG_TOKEN
+import ru.nifontbus.firebasemessageserver.cconst.Const.Companion.LEGACY_SERVER_KEY
+import ru.nifontbus.firebasemessageserver.cconst.Const.Companion.REG_TOKEN
 import ru.nifontbus.firebasemessageserver.databinding.FragmentFirstBinding
 
 /**

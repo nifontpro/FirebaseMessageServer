@@ -14,4 +14,5 @@
 .cxx
 local.properties
 
-/app/src/main/java/ru/nifontbus/firebasemessageserver/Const.kt
+/app/src/main/java/ru/nifontbus/firebasemessageserver/cconst
+
