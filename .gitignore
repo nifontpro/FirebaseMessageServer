@@ -13,6 +13,4 @@
 .externalNativeBuild
 .cxx
 local.properties
-
-/app/src/main/java/ru/nifontbus/firebasemessageserver/cconst
-
+fcm.properties

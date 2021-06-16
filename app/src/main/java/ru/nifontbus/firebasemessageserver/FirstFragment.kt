@@ -12,9 +12,9 @@ import okhttp3.RequestBody.Companion.toRequestBody
 import okio.IOException
 import org.json.JSONObject
 import ru.nifontbus.firebasemessageserver.App.Companion.pushHandler
-import ru.nifontbus.firebasemessageserver.cconst.Const.Companion.LEGACY_SERVER_KEY
-import ru.nifontbus.firebasemessageserver.cconst.Const.Companion.REG_TOKEN
 import ru.nifontbus.firebasemessageserver.databinding.FragmentFirstBinding
+
+const val TAG = "My log"
 
 /**
  * A simple [Fragment] subclass as the default destination in the navigation.
@@ -73,7 +73,7 @@ class FirstFragment : Fragment() {
 
             dataJson.put("body", body)
             dataJson.put("title", title)
-            json.put("to", REG_TOKEN)
+            json.put("to", BuildConfig.REG_TOKEN)
             json.put("notification", dataJson)
 
             Log.d("my", "json: $json")
@@ -81,7 +81,7 @@ class FirstFragment : Fragment() {
             val request = Request.Builder()
                 .url("https://fcm.googleapis.com/fcm/send")
                 .header("Content-Type", "application/json")
-                .header("Authorization", "key=$LEGACY_SERVER_KEY")
+                .header("Authorization", "key=${BuildConfig.LEGACY_SERVER_KEY}")
                 .method("POST", json.toString().toRequestBody())
                 .build()
 

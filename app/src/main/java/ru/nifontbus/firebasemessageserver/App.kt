@@ -4,7 +4,6 @@ import android.app.Application
 import android.os.Handler
 import android.os.HandlerThread
 import android.util.Log
-import ru.nifontbus.firebasemessageserver.cconst.Const
 
 class App: Application() {
     companion object {
@@ -12,7 +11,7 @@ class App: Application() {
         val pushHandler by lazy { Handler(handlerThread.looper) }
         init {
             handlerThread.start()
-            Log.e(Const.TAG, "Start Push Thread!")
+            Log.e("my", "Start Push Thread!")
         }
     }
 
